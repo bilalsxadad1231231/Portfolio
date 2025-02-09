@@ -1,20 +1,41 @@
 // Import all SVG icons from the skill folder
-import awsIcon from '../assets/Skill/aws.svg';
-import bootstrapIcon from '../assets/Skill/bootstrap.svg';
-import cssIcon from '../assets/Skill/css.svg';
-import dockerIcon from '../assets/Skill/docker.svg';
-import firebaseIcon from '../assets/Skill/firebase.svg';
-import gitIcon from '../assets/Skill/git.svg';
-import htmlIcon from '../assets/Skill/html.svg';
-import javascriptIcon from '../assets/Skill/javascript.svg';
-import materialuiIcon from '../assets/Skill/materialui.svg';
-import mongoDBIcon from '../assets/Skill/mongoDB.svg';
-import mysqlIcon from '../assets/Skill/mysql.svg';
-import nextJSIcon from '../assets/Skill/nextJS.svg';
-import reactIcon from '../assets/Skill/react.svg';
-import tailwindIcon from '../assets/Skill/tailwind.svg';
+import awsIcon from '../assetes/skill/aws.svg';
+import bootstrapIcon from '../assetes/skill/bootstrap.svg';
+import cssIcon from '../assetes/skill/css.svg';
+import dockerIcon from '../assetes/skill/docker.svg';
+import firebaseIcon from '../assetes/skill/firebase.svg';
+import gitIcon from '../assetes/skill/git.svg';
+import htmlIcon from '../assetes/skill/html.svg';
+import javascriptIcon from '../assetes/skill/javascript.svg';
+import materialuiIcon from '../assetes/skill/materialui.svg';
+import mongoDBIcon from '../assetes/skill/mongoDB.svg';
+import mysqlIcon from '../assetes/skill/mysql.svg';
+import nextJSIcon from '../assetes/skill/nextJS.svg';
+import reactIcon from '../assetes/skill/react.svg';
+import tailwindIcon from '../assetes/skill/tailwind.svg';
+import { skillicons } from './icons';
 
-// Provided skills data
+
+
+// import awsIcon from '../assetes/skill/aws.svg'
+// import htmlIcon from '../assetes/skill/html.svg'
+
+
+
+
+// export const skilldata = {
+//   {id:1, name: "HTML" , icon: htmlIcon},
+//   {id:2, name: "AWS" , icon: awsIcon}
+// }
+
+ 
+
+
+
+// // export const skillIconss = import.meta.glob("../assetes/skill/*.svg", { eager: true });
+// // console.log(`skillIconss data: ${skillIconss}`)
+
+// // Provided skills data
 const skillsData = [
   'HTML',
   'CSS',
@@ -38,7 +59,7 @@ const skillsData = [
   'Strapi'
 ];
 
-// Map skillsData to their corresponding icons
+// // Map skillsData to their corresponding icons
 const skillIcons = skillsData.map((skill) => {
   switch (skill.toLowerCase()) {
     case 'html':
@@ -85,6 +106,8 @@ const skillIcons = skillsData.map((skill) => {
       return { name: skill, skillicon: '' }; // Fallback for missing icons
   }
 });
+
+ 
 
 // Export the JSON object
 export default skillIcons;

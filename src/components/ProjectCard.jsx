@@ -7,19 +7,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const ProjectCard = ({project,index}) => {
  
   return (
-<div key={index} className='bg-white/10  backdrop-blur-xl border border-white/20 shadow-lg rounded-lg p-6 w-full max-w-lg space-y-4 
+<div key={index} className='bg-white/10  backdrop-blur-xl border border-white/20 shadow-lg rounded-lg p-6 w-full max-w-lg   space-y-4 
     transform transition-transform duration-300 ease-in-out  hover:cursor-pointer hover:border-white '
     >
 
  
 {/* image display box */} 
-    <div className="w-full overflow-hidden rounded-lg">
+    {/* <div className="w-full overflow-hidden rounded-lg">
     <img 
         src={profileImage} 
         alt="Project Preview" 
-        className="w-full h-auto max-h-60 object-cover rounded-lg"
+        className="w-full   h-60 object-contain rounded-lg"
     />
-    </div>
+    </div> */}
+
+<div className="w-full h-60 overflow-hidden rounded-lg">
+  <img 
+    src={profileImage} 
+    alt="Project Preview" 
+    className="w-full h-full object-contian rounded-lg"
+  />
+</div>
  
     {/* detail about the porject portion */}
     <div>
@@ -40,7 +48,7 @@ const ProjectCard = ({project,index}) => {
         <h1 className="text-white font-semibold mb-2">Tech Stack:</h1>
         <div className="flex flex-wrap gap-2 ">
         
-        { project.tools.filter((_,index) => index<6 ).map((tech,index)=>(
+        { project.tools.filter((_,index) => index<6).map((tech,index)=>(
              <span key={`${project.name}-${index}`} className="bg-white text-border px-1 py-0.5 rounded-md">{tech}</span>
         ))
 

@@ -86,11 +86,13 @@ const Home = () => {
 
       {/* Profile Image */}
       <div className=' relative mt-8 md:mt-0 md:w-1/2 justify-center h-[550px] flex items-center'>
+      <div>
         <img 
           src= {profileImage}
           alt='Profile' 
           className='w-80 h-80 md:w-[400px] md:h-[400px] rounded-full border-[6px] border-border shadow-lg object-cover'
         />
+        </div>
 
       </div>
 

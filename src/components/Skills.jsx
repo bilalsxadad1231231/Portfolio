@@ -1,14 +1,21 @@
 import React from 'react';
 import WaveSection from './WaveSection';
 import dockerimg from './docker.svg'
-
+import awsimg from '../assetes/skill/aws.svg'
 import Marquee from "react-fast-marquee";
 import Heading from './ReusebleComponents/Heading';
 import SkillCard from './ReusebleComponents/SkillCard';
 import Container from './ReusebleComponents/Container';
- 
-const Skills = () => {
+// import { skilldata } from '../data/Skillicon';
 
+import skillIcons from '../data/Skillicon';
+ 
+
+
+const Skills = () => {
+ 
+  console.log(`skillicons array data: ${typeof(skillIcons)}`)
+ 
   return (
     <div id='skills'>
         <WaveSection fillcolor="var(--color-bg)" bgColor="bg-border"/>
@@ -30,24 +37,31 @@ const Skills = () => {
         {/*  for text-border    */}
         <div className='py-10 flex items-center justify-center gap-x-32 space-x-6'>
  
-            <Marquee 
-            speed={30} pauseOnHover={true} gradient={false} className='h-40  gap-x-6 '>
+                <Marquee
+                  gradient={false}
+                  speed={80}
+                  pauseOnHover={true}
+                  pauseOnClick={true}
+                  delay={0}
+                  play={true}
+                  direction="left"
+                >
+                
                 <div className="flex space-x-6">
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
-                <SkillCard iconPath={dockerimg} skillName="Docker"/>
+
+                {/* {object.keys(skillIcons).map((key,value) => {
+                  return   <SkillCard  iconPath={skilldata[0].icon} skillName="Docker"/> 
+                })} */}
+
+                {
+                  skillIcons.map((skill,index)=>(
+
+                    <SkillCard key={index} skill={skill} /> 
+                  ))
+                }
+
+                 
+               
 
                 </div>
             </Marquee>
