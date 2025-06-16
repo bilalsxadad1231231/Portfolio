@@ -1,17 +1,17 @@
 export const personalData = {
-    name: "M Hammad", 
+    name: "M BILAL", 
     profile: '../assetes/image.jpg',
-    designation: "FULL STACK DEVELOPER",
-    description: "My name is Muhammad Hammad. I am a professional and enthusiastic programmer in my daily life. I am a quick learner with a self-learning attitude. I love to learn and explore new technologies and am passionate about problem-solving. I love almost all the stacks of web application development and love to make the web more open to the world. My core skill is based on JavaScript and I love to do most of the things using JavaScript. I am available for any kind of job opportunity that suits my skills and interests.",
-    email: 'muhammadhammad010100@gmail.com',
-    phone: ' ',
-    address: 'Rawalpindi',
-    github: 'https://github.com/said7388',
+    designation: "FULL STACK AI DEVELOPER",
+    description: "Full-Stack Software Engineer and AI Developer specializing in Generative AI, LLMs, Agentic AI and NLP, with hands-on experience in LangChain, LangGraph, and LLMOps/MLOps for scalable AI deployment. Skilled in Python, FastAPI, SQL (backend) and React, React Native (frontend), with strong expertise in Computer Vision, Diffusion Models, and AI-powered automation. Proficient in CI/CD, Docker, cloud infrastructure (AWS, Azure), and continuously growing through certifications in AWS, Google IT, and Deep Learning.",
+    email: 'bilal.ai.developer@gmail.com',
+    phone: '+923119404616',
+    address: 'Malakand',
+    github: 'https://github.com/bilalsxadad1231231',
     facebook: 'https://www.facebook.com/abusaid.riyaz/',
     linkedIn: 'https://www.linkedin.com/in/abu-said-bd/',
     twitter: 'https://twitter.com/said7388',
     stackOverflow: 'https://stackoverflow.com/users/16840768/abu-said',
     leetcode: "https://leetcode.com/said3812/",
     devUsername: "said7388",
-    resume: "https://drive.google.com/file/d/1eyutpKFFhJ9X-qpQGKhUNnVRkB5Wer00/view?usp=sharing"
+    resume: "https://drive.google.com/file/d/1GBLC-KIqUk8eL70HsXo3NQUxu1rgv9lU/view?usp=drivesdk"
   }

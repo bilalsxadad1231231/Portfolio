@@ -7,6 +7,8 @@ import Container from "./ReusebleComponents/Container";
 import {projectsData} from '../data/projectData.js'
 
 const Projects = () => {
+  console.log('Projects Data:', projectsData); // Debug log
+
   return (
     <div id="projects">
       <WaveSection fillcolor="var(--color-border)" bgColor="bg-bg" />
@@ -21,15 +23,14 @@ const Projects = () => {
         </div>
 
         {/* card contaning section   */}
-        <div className="relative  p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
-
-        {
-            projectsData.map((project,index) =>  (
-                <ProjectCard project={project} index={index} />
-            ))
-        }
-      
-      
+        <div className="relative p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projectsData && projectsData.length > 0 ? (
+          projectsData.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))
+        ) : (
+          <div className="col-span-full text-center text-white">No projects found</div>
+        )}
         </div>
 
     </Container>

@@ -1,113 +1,100 @@
+/**
+ * Skills data and icon mapping for the portfolio
+ * Uses Vite's glob import to automatically import all SVG icons
+ */
+
 // Import all SVG icons from the skill folder
-import awsIcon from '../assetes/skill/aws.svg';
-import bootstrapIcon from '../assetes/skill/bootstrap.svg';
-import cssIcon from '../assetes/skill/css.svg';
-import dockerIcon from '../assetes/skill/docker.svg';
-import firebaseIcon from '../assetes/skill/firebase.svg';
-import gitIcon from '../assetes/skill/git.svg';
-import htmlIcon from '../assetes/skill/html.svg';
-import javascriptIcon from '../assetes/skill/javascript.svg';
-import materialuiIcon from '../assetes/skill/materialui.svg';
-import mongoDBIcon from '../assetes/skill/mongoDB.svg';
-import mysqlIcon from '../assetes/skill/mysql.svg';
-import nextJSIcon from '../assetes/skill/nextJS.svg';
-import reactIcon from '../assetes/skill/react.svg';
-import tailwindIcon from '../assetes/skill/tailwind.svg';
-import { skillicons } from './icons';
+const skillIcons = import.meta.glob('../assetes/skill/*.svg', { eager: true });
 
-
-
-// import awsIcon from '../assetes/skill/aws.svg'
-// import htmlIcon from '../assetes/skill/html.svg'
-
-
-
-
-// export const skilldata = {
-//   {id:1, name: "HTML" , icon: htmlIcon},
-//   {id:2, name: "AWS" , icon: awsIcon}
-// }
-
- 
-
-
-
-// // export const skillIconss = import.meta.glob("../assetes/skill/*.svg", { eager: true });
-// // console.log(`skillIconss data: ${skillIconss}`)
-
-// // Provided skills data
+// Provided skills data with their corresponding icon filenames
 const skillsData = [
-  'HTML',
-  'CSS',
-  'Javascript',
-  'Typescript',
-  'React',
-  'Next JS',
-  'Tailwind',
-  'MongoDB',
-  'MySQL',
-  'PostgreSQL',
-  'Git',
-  'AWS',
-  'Bootstrap',
-  'Docker',
-  'Go',
-  'Figma',
-  'Firebase',
-  'MaterialUI',
-  'Nginx',
-  'Strapi'
+  // Core Programming Languages
+  { name: 'Python', icon: 'python.svg' },
+  { name: 'JavaScript', icon: 'javascript.svg' },
+  { name: 'Java', icon: 'java.svg' },
+  { name: 'C++', icon: 'cpp.svg' },
+  { name: 'C', icon: 'c.svg' },
+
+  // AI & ML Core
+  { name: 'Machine Learning', icon: 'machineLearning.svg' },
+  { name: 'Deep Learning', icon: 'deeplearning.svg' },
+  { name: 'Computer Vision', icon: 'computerVisionn.svg' },
+  { name: 'NLP', icon: 'nlp-1.svg' },
+  { name: 'TensorFlow', icon: 'tensorflow.svg' },
+  { name: 'PyTorch', icon: 'pytorch.svg' },
+  { name: 'Scikit-learn', icon: 'scikitlearn.svg' },
+  { name: 'OpenCV', icon: 'opencv-svgrepo-com.svg' },
+  { name: 'Image Segmentation', icon: 'imagesegmentation.svg' },
+  { name: 'Object Detection', icon: 'objectdetection.svg' },
+  { name: 'Diffusion Models', icon: 'diffusionModels.svg' },
+  { name: 'Generative AI', icon: 'genrativeAI.svg' },
+
+  // Modern AI Tools
+  { name: 'LangChain', icon: 'langchain.svg' },
+  { name: 'LangGraph', icon: 'langgraph.svg' },
+  { name: 'LlamaIndex', icon: 'llamaindex.svg' },
+  { name: 'CrewAI', icon: 'crewai.svg' },
+  { name: 'RAG', icon: 'rag.svg' },
+  { name: 'LLMOps', icon: 'llmops.svg' },
+  { name: 'Prompt Engineering', icon: 'promptengineering.svg' },
+  { name: 'AI Agents', icon: 'aiagent.svg' },
+  { name: 'Chatbot Development', icon: 'chatbot.svg' },
+  { name: 'Hugging Face', icon: 'hugging-face.svg' },
+  { name: 'Ollama', icon: 'ollama.svg' },
+
+  // Data Science Stack
+  { name: 'Pandas', icon: 'pandas.svg' },
+  { name: 'NumPy', icon: 'numpy.svg' },
+  { name: 'Matplotlib', icon: 'matplotlib.svg' },
+  { name: 'Seaborn', icon: 'seaborn.svg' },
+  { name: 'Kaggle', icon: 'kaggle.svg' },
+  { name: 'Google Colab', icon: 'googelcolab.svg' },
+
+  // Web Development
+  { name: 'React', icon: 'react.svg' },
+  { name: 'React Native', icon: 'react.svg' },
+  { name: 'Tailwind', icon: 'tailwind.svg' },
+  { name: 'MaterialUI', icon: 'materialui.svg' },
+
+  // Backend & APIs
+  { name: 'FastAPI', icon: 'fastapi.svg' },
+  { name: 'Flask', icon: 'flask.svg' },
+  { name: 'Postman', icon: 'postman.svg' },
+
+  // Databases
+  { name: 'MongoDB', icon: 'mongoDB.svg' },
+  { name: 'MySQL', icon: 'mysql.svg' },
+  { name: 'PostgreSQL', icon: 'postgresql.svg' },
+  { name: 'Weaviate', icon: 'Weaviate.svg' },
+  { name: 'Chroma', icon: 'chroma.svg' },
+  { name: 'Pinecone', icon: 'Pinecone Database.svg' },
+
+  // Cloud & DevOps
+  { name: 'AWS', icon: 'aws.svg' },
+  { name: 'Azure', icon: 'azure.svg' },
+  { name: 'Docker', icon: 'docker.svg' },
+  { name: 'Kubernetes', icon: 'kubernetes.svg' },
+  { name: 'DevOps', icon: 'Devops.svg' },
+  { name: 'CI/CD', icon: 'cicdPipeline.svg' },
+
+  // Development Tools
+  { name: 'Git', icon: 'git.svg' },
+  { name: 'GitHub', icon: 'github.svg' },
+  { name: 'VS Code', icon: 'visual-studio-code.svg' },
+  { name: 'Firebase', icon: 'firebase.svg' },
+
+  // IoT & Hardware
+  { name: 'IoT', icon: 'iot.svg' },
+  { name: 'Arduino', icon: 'arduino.svg' },
 ];
 
-// // Map skillsData to their corresponding icons
-const skillIcons = skillsData.map((skill) => {
-  switch (skill.toLowerCase()) {
-    case 'html':
-      return { name: skill, skillicon: htmlIcon };
-    case 'css':
-      return { name: skill, skillicon: cssIcon };
-    case 'javascript':
-      return { name: skill, skillicon: javascriptIcon };
-    case 'typescript':
-      return { name: skill, skillicon: 'typescript.svg' }; // Add the icon if available
-    case 'react':
-      return { name: skill, skillicon: reactIcon };
-    case 'next js':
-      return { name: skill, skillicon: nextJSIcon };
-    case 'tailwind':
-      return { name: skill, skillicon: tailwindIcon };
-    case 'mongodb':
-      return { name: skill, skillicon: mongoDBIcon };
-    case 'mysql':
-      return { name: skill, skillicon: mysqlIcon };
-    case 'postgresql':
-      return { name: skill, skillicon: 'postgresql.svg' }; // Add the icon if available
-    case 'git':
-      return { name: skill, skillicon: gitIcon };
-    case 'aws':
-      return { name: skill, skillicon: awsIcon };
-    case 'bootstrap':
-      return { name: skill, skillicon: bootstrapIcon };
-    case 'docker':
-      return { name: skill, skillicon: dockerIcon };
-    case 'go':
-      return { name: skill, skillicon: 'go.svg' }; // Add the icon if available
-    case 'figma':
-      return { name: skill, skillicon: 'figma.svg' }; // Add the icon if available
-    case 'firebase':
-      return { name: skill, skillicon: firebaseIcon };
-    case 'materialui':
-      return { name: skill, skillicon: materialuiIcon };
-    case 'nginx':
-      return { name: skill, skillicon: 'nginx.svg' }; // Add the icon if available
-    case 'strapi':
-      return { name: skill, skillicon: 'strapi.svg' }; // Add the icon if available
-    default:
-      return { name: skill, skillicon: '' }; // Fallback for missing icons
-  }
+// Map skills data to their corresponding icons
+const mappedSkills = skillsData.map((skill) => {
+  const iconPath = `../assetes/skill/${skill.icon}`;
+  return {
+    name: skill.name,
+    skillicon: skillIcons[iconPath]?.default || ''
+  };
 });
 
- 
-
-// Export the JSON object
-export default skillIcons;
+export default mappedSkills;

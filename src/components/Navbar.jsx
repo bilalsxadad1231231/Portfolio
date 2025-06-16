@@ -16,12 +16,12 @@ const {theme , setTheme} = useTheme() ;
   return (
  
     // ${darkMode ? 'bg-black' : 'bg-gray-900'} this is for dark and light mode in the nav tag
-    <nav className={`fixed top-0 left-0 right-0 z-50 px-48 flex bg-bg bg-opacity-50  justify-between items-center p-2 text-white shadow-xl`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 md:px-48 flex bg-bg bg-opacity-50  justify-between items-center p-2 text-white shadow-xl`}>
 
       
       {/* Logo */}
        
-      <div className={`text-xl font-bold text-white bg-border p-4 top-0 border rounded-b-lg  hover:cursor-pointer`}>MH</div>
+      <div className={`text-xl font-bold text-white bg-border p-4 top-0 border rounded-b-lg  hover:cursor-pointer`}>MB</div>
        
    {/* Tab */}
 

@@ -1,7 +1,7 @@
 
 import { personalData } from '../data/personalData';
 
-import profileImage from '../assetes/image.jpg'; // Replace with your actual image path
+import profileImage from '../assetes/myProfile.jpg'; // Replace with your actual image path
 
 import React from 'react';
  
@@ -54,18 +54,13 @@ const Home = () => {
         {/* inside main: Icons and Links Placeholder */}
         <div className='flex justify-center md:justify-start space-x-4 text-gray-300'>
         <span>
-            <button onClick={() => window.open('https://github.com', '_blank')}>
+            <button onClick={() => window.open('https://github.com/bilalsxadad1231231', '_blank')}>
               <FontAwesomeIcon icon={faGithub} size="2x" className='text-diffcolor' />
             </button>
           </span>
           <span>
-            <button onClick={() => window.open('https://linkedin.com', '_blank')}>
+            <button onClick={() => window.open('https://linkedin.com/in/muhammad-bilal-866750280/', '_blank')}>
               <FontAwesomeIcon icon={faLinkedin} size="2x" className='text-diffcolor' />
-            </button>
-          </span>
-          <span>
-            <button onClick={() => window.open('https://instagram.com', '_blank')}>
-              <FontAwesomeIcon icon={faInstagram} size="2x" className='text-diffcolor' />
             </button>
           </span>
         </div>

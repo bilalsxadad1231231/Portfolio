@@ -1,7 +1,6 @@
 import React from 'react';
 import WaveSection from './WaveSection';
 import Form from './Form';
-import profileImage from '../assetes/image.jpg'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import Heading from './ReusebleComponents/Heading';
@@ -38,18 +37,13 @@ const Contect = () => {
             <h1 className='text-border text-xl font-bold'>Connect with me</h1>
                  <div className='flex justify-center md:justify-center space-x-4 text-gray-300 space-x-5'>
                         <span>
-                            <button onClick={() => window.open('https://github.com', '_blank')}>
+                            <button onClick={() => window.open('https://github.com/bilalsxadad1231231', '_blank')}>
                               <FontAwesomeIcon icon={faGithub} size="2x" className='text-diffcolor' />
                             </button>
                           </span>
                           <span>
-                            <button onClick={() => window.open('https://linkedin.com', '_blank')}>
+                            <button onClick={() => window.open('https://linkedin.com/in/muhammad-bilal-866750280/', '_blank')}>
                               <FontAwesomeIcon icon={faLinkedin} size="2x" className='text-diffcolor' />
-                            </button>
-                          </span>
-                          <span>
-                            <button onClick={() => window.open('https://instagram.com', '_blank')}>
-                              <FontAwesomeIcon icon={faInstagram} size="2x" className='text-diffcolor' />
                             </button>
                           </span>
                         </div>
