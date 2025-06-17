@@ -38,7 +38,6 @@ export default defineConfig({
       '@fortawesome/free-brands-svg-icons',
       'react-simple-typewriter',
       'react-fast-marquee',
-      'react-wavify',
       'react-scroll',
       'react-toastify',
       '@emailjs/browser'
