@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import WaveSection from './WaveSection';
-import dockerimg from './docker.svg'
-import awsimg from '../assetes/skill/aws.svg'
 import Marquee from "react-fast-marquee";
 import Heading from './ReusebleComponents/Heading';
 import SkillCard from './ReusebleComponents/SkillCard';
@@ -12,9 +10,9 @@ import skillIcons from '../data/Skillicon';
  
 
 
-const Skills = () => {
-  // Organize skills into categories
-  const categories = {
+const Skills = React.memo(() => {
+  // Memoize categories to prevent recalculation on every render
+  const categories = useMemo(() => ({
     programming: skillIcons.filter(skill => 
       ['Python', 'JavaScript', 'Java', 'C++', 'C'].includes(skill.name)
     ),
@@ -40,41 +38,32 @@ const Skills = () => {
     tools: skillIcons.filter(skill => 
       ['Git', 'GitHub', 'VS Code', 'Firebase', 'IoT', 'Arduino'].includes(skill.name)
     )
-  };
+  }), []);
 
-  // Configuration for each track - all moving left
-  const trackConfig = {
-    programming: { direction: "left", speed: 200 },
-    aiMl: { direction: "left", speed: 180 },
-    modernAI: { direction: "left", speed: 160 },
-    dataScience: { direction: "left", speed: 200 },
-    webDev: { direction: "left", speed: 180 },
-    backend: { direction: "left", speed: 160 },
-    cloudDevOps: { direction: "left", speed: 200 },
-    tools: { direction: "left", speed: 180 }
-  };
+  // Memoize track configuration
+  const trackConfig = useMemo(() => ({
+    programming: { direction: "left", speed: 150 },
+    aiMl: { direction: "left", speed: 130 },
+    modernAI: { direction: "left", speed: 120 },
+    dataScience: { direction: "left", speed: 150 },
+    webDev: { direction: "left", speed: 130 },
+    backend: { direction: "left", speed: 120 },
+    cloudDevOps: { direction: "left", speed: 150 },
+    tools: { direction: "left", speed: 130 }
+  }), []);
 
   return (
     <div id='skills'>
-        <WaveSection fillcolor="var(--color-bg)" bgColor="bg-border"/>
-
-
-
-     
-
-    <Container bgcolor='bg'>
-      {/* Grid background div */}
-         <div className="absolute inset-0 h-full w-full  bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] z- 0"></div>
-               
-               
-                <div className="flex justify-center my-5 lg:py-2 ">  
-                <Heading text="Skills" bgcolor="border" textcolor="white" />
-                </div>
-
-
+      <WaveSection fillcolor="var(--color-bg)" bgColor="bg-border"/>
+      <Container bgcolor='bg'>
+        {/* Grid background div */}
+        <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] z-0"></div>
+        <div className="flex justify-center my-5 lg:py-2">  
+          <Heading text="Skills" bgcolor="border" textcolor="white" />
+        </div>
         {/* Render each category in its own track */}
         {Object.entries(categories).map(([category, skills]) => (
-          <div key={category} className='py-5 flex items-center justify-center'>
+          <div key={category} className='py-3 sm:py-5 flex items-center justify-center'>
             <Marquee
               gradient={false}
               speed={trackConfig[category].speed}
@@ -84,19 +73,17 @@ const Skills = () => {
               play={true}
               direction={trackConfig[category].direction}
             >
-              <div className="flex space-x-6">
+              <div className="flex space-x-4 sm:space-x-6">
                 {skills.map((skill, index) => (
-                  <SkillCard key={index} skill={skill} />
+                  <SkillCard key={`${category}-${skill.name}-${index}`} skill={skill} />
                 ))}
               </div>
             </Marquee>
           </div>
         ))}
-
-    </Container>
-
+      </Container>
     </div>
   );
-}
+});
 
 export default Skills;

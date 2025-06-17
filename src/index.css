@@ -2,13 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
- :root {
+:root {
   --color-bg: #ffffff;
   --color-text: #FF8904;
   --color-border: #FF8904;
   --color-diffcolor: #222222;
-
-  
 }
 
 /* Dark Theme */
@@ -17,7 +15,6 @@
   --color-text: #FF8904;
   --color-border: #FF8904;
   --color-diffcolor: #ffffff;
-  
 }
 
 /* Blue Theme */
@@ -26,13 +23,9 @@
   --color-text: #1e40af;
   --color-border: #2563eb;
   --color-diffcolor: #222222;
-   
 }
 
-
-
 /* custom scroll */
-
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px; /* Thin scrollbar */
 }
@@ -46,7 +39,120 @@
   background: rgba(255, 255, 255, 0.1); /* Subtle track */
 }
 
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
 
-/* html {
+/* Optimize animations */
+.transform, .transition-transform, .hover\:scale-105, .hover\:scale-110 {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Optimize backdrop blur */
+.backdrop-blur-xl {
+  will-change: backdrop-filter;
+}
+
+/* Optimize images */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Navbar specific styles */
+nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.5rem 1rem !important;
+  background-color: var(--color-bg) !important;
+  background-opacity: 0.95 !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  border-bottom: 1px solid rgba(255, 137, 4, 0.2) !important;
+}
+
+/* Ensure mobile menu button is always visible */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.5rem 1rem !important;
+  }
+  
+  nav > div:last-child {
+    display: none !important; /* Hide desktop theme selector on mobile */
+  }
+  
+  nav > div:nth-child(2) {
+    display: none !important; /* Hide desktop navigation on mobile */
+  }
+  
+  nav > div:nth-child(3) {
+    display: flex !important; /* Show mobile menu button */
+  }
+}
+
+/* Mobile-friendly improvements */
+@media (max-width: 768px) {
+  /* Ensure minimum touch target size */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve text readability on mobile */
+  p, span, div {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  /* Better form input sizing on mobile */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+}
+
+/* Smooth scrolling for better UX */
+html {
   scroll-behavior: smooth;
-} */
+}
+
+/* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+}
+
+/* Optimize for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile menu animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
