@@ -1,39 +1,60 @@
-import React from 'react';
-import WaveSection from './WaveSection';
-import Heading from './ReusebleComponents/Heading';
-import Container from './ReusebleComponents/Container';
- 
+import IdBadge from './IdBadge';
+
+const CERTIFICATIONS = ['AWS', 'Google IT', 'Deep Learning'];
 
 const About = () => {
   return (
-     <div id='about'>
-    <WaveSection fillcolor="var(--color-border)" bgColor="bg-bg"/>
-    
+    <section
+      id="about"
+      className="relative w-full overflow-hidden bg-void pb-12 pt-24 text-bone"
+    >
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-accent">
+          About
+        </p>
+        <h2 className="mt-4 max-w-3xl font-display text-[clamp(2.25rem,6vw,4rem)] font-semibold leading-[0.95] tracking-tight">
+          Two halves of the same job
+        </h2>
 
-    <Container bgcolor='border'>
- 
-        {/* about me section to box  */}
-      <div className="flex justify-center my-5 lg:py-2 ">
-        <Heading text="About me" bgcolor="white" textcolor="border" />
-      </div>
- 
-       <div className='py-10  flex items-center justify-center gap-x-32'>
-        <div className='bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg rounded-lg p-6 w-full max-w-3xl '>
-          <h3 className='text-2xl font-semibold  text-white'>My Self Muhammd Bilal</h3>
-          <p className='text-white/80 mt-2 text-lg  text-justify indent-16 line-clamp-5'>Full-Stack Software Engineer and AI Developer specializing in Generative AI, LLMs, Agentic AI and NLP, with hands-on experience in LangChain, LangGraph, and LLMOps/MLOps for scalable AI deployment. Skilled in Python, FastAPI, SQL (backend) and React, React Native (frontend), with strong expertise in Computer Vision, Diffusion Models, and AI-powered automation.</p>
-          <p className='text-white/80 mt-2 text-lg text-justify'>Proficient in CI/CD, Docker, cloud infrastructure (AWS, Azure), and continuously growing through certifications in AWS, Google IT, and Deep Learning. I thrive in collaborative environments, continuously learning and adapting to new technologies to stay ahead in the ever-evolving tech landscape.</p>
-          <h3 className='text-1xl font-semibold text-white'>Let's connect and create exceptional digital experiences.</h3>
+        <div className="mt-14 grid grid-cols-1 items-start gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+          {/* The narrative */}
+          <div>
+            <p className="text-base leading-relaxed text-fog md:text-lg">
+              I build AI systems end to end. Most of my recent work is generative
+              and agentic — retrieval pipelines, agent graphs in LangChain and
+              LangGraph, and fine-tuned language models — wrapped in FastAPI
+              services and shipped with Docker and CI/CD on AWS and Azure.
+            </p>
+            <p className="mt-6 text-base leading-relaxed text-fog md:text-lg">
+              The other half is computer vision and diffusion models: detection,
+              segmentation, tracking, OCR, and image generation. I write the
+              frontends too, in React and React Native, which is usually what
+              turns a model into something a person can actually use.
+            </p>
+
+            <div className="mt-10 border-t border-bone/10 pt-6">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fog/70">
+                Certified in
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {CERTIFICATIONS.map((cert) => (
+                  <li
+                    key={cert}
+                    className="rounded-md border border-bone/10 px-2.5 py-1 font-mono text-[11px] text-fog"
+                  >
+                    {cert}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* The badge */}
+          <IdBadge />
         </div>
-
-        
-
       </div>
-
-      </Container>
-
- 
-    </div>
+    </section>
   );
-}
+};
 
 export default About;

@@ -1,100 +1,97 @@
 /**
- * Skills data and icon mapping for the portfolio
- * Uses Vite's glob import to automatically import all SVG icons
+ * Skills data and icon mapping.
+ * Icons are rasterised WebP: the original SVGs carried embedded bitmaps and
+ * totalled ~7MB, which is far too heavy to load into a 3D scene at once.
  */
+const iconModules = import.meta.glob('../assetes/skillicons/*.webp', { eager: true });
 
-// Import all SVG icons from the skill folder
-const skillIcons = import.meta.glob('../assetes/skill/*.svg', { eager: true });
-
-// Provided skills data with their corresponding icon filenames
-const skillsData = [
-  // Core Programming Languages
-  { name: 'Python', icon: 'python.svg' },
-  { name: 'JavaScript', icon: 'javascript.svg' },
-  { name: 'Java', icon: 'java.svg' },
-  { name: 'C++', icon: 'cpp.svg' },
-  { name: 'C', icon: 'c.svg' },
-
-  // AI & ML Core
-  { name: 'Machine Learning', icon: 'machineLearning.svg' },
-  { name: 'Deep Learning', icon: 'deeplearning.svg' },
-  { name: 'Computer Vision', icon: 'computerVisionn.svg' },
-  { name: 'NLP', icon: 'nlp-1.svg' },
-  { name: 'TensorFlow', icon: 'tensorflow.svg' },
-  { name: 'PyTorch', icon: 'pytorch.svg' },
-  { name: 'Scikit-learn', icon: 'scikitlearn.svg' },
-  { name: 'OpenCV', icon: 'opencv-svgrepo-com.svg' },
-  { name: 'Image Segmentation', icon: 'imagesegmentation.svg' },
-  { name: 'Object Detection', icon: 'objectdetection.svg' },
-  { name: 'Diffusion Models', icon: 'diffusionModels.svg' },
-  { name: 'Generative AI', icon: 'genrativeAI.svg' },
-
-  // Modern AI Tools
-  { name: 'LangChain', icon: 'langchain.svg' },
-  { name: 'LangGraph', icon: 'langgraph.svg' },
-  { name: 'LlamaIndex', icon: 'llamaindex.svg' },
-  { name: 'CrewAI', icon: 'crewai.svg' },
-  { name: 'RAG', icon: 'rag.svg' },
-  { name: 'LLMOps', icon: 'llmops.svg' },
-  { name: 'Prompt Engineering', icon: 'promptengineering.svg' },
-  { name: 'AI Agents', icon: 'aiagent.svg' },
-  { name: 'Chatbot Development', icon: 'chatbot.svg' },
-  { name: 'Hugging Face', icon: 'hugging-face.svg' },
-  { name: 'Ollama', icon: 'ollama.svg' },
-
-  // Data Science Stack
-  { name: 'Pandas', icon: 'pandas.svg' },
-  { name: 'NumPy', icon: 'numpy.svg' },
-  { name: 'Matplotlib', icon: 'matplotlib.svg' },
-  { name: 'Seaborn', icon: 'seaborn.svg' },
-  { name: 'Kaggle', icon: 'kaggle.svg' },
-  { name: 'Google Colab', icon: 'googelcolab.svg' },
-
-  // Web Development
-  { name: 'React', icon: 'react.svg' },
-  { name: 'React Native', icon: 'react.svg' },
-  { name: 'Tailwind', icon: 'tailwind.svg' },
-  { name: 'MaterialUI', icon: 'materialui.svg' },
-
-  // Backend & APIs
-  { name: 'FastAPI', icon: 'fastapi.svg' },
-  { name: 'Flask', icon: 'flask.svg' },
-  { name: 'Postman', icon: 'postman.svg' },
-
-  // Databases
-  { name: 'MongoDB', icon: 'mongoDB.svg' },
-  { name: 'MySQL', icon: 'mysql.svg' },
-  { name: 'PostgreSQL', icon: 'postgresql.svg' },
-  { name: 'Weaviate', icon: 'Weaviate.svg' },
-  { name: 'Chroma', icon: 'chroma.svg' },
-  { name: 'Pinecone', icon: 'Pinecone Database.svg' },
-
-  // Cloud & DevOps
-  { name: 'AWS', icon: 'aws.svg' },
-  { name: 'Azure', icon: 'azure.svg' },
-  { name: 'Docker', icon: 'docker.svg' },
-  { name: 'Kubernetes', icon: 'kubernetes.svg' },
-  { name: 'DevOps', icon: 'Devops.svg' },
-  { name: 'CI/CD', icon: 'cicdPipeline.svg' },
-
-  // Development Tools
-  { name: 'Git', icon: 'git.svg' },
-  { name: 'GitHub', icon: 'github.svg' },
-  { name: 'VS Code', icon: 'visual-studio-code.svg' },
-  { name: 'Firebase', icon: 'firebase.svg' },
-
-  // IoT & Hardware
-  { name: 'IoT', icon: 'iot.svg' },
-  { name: 'Arduino', icon: 'arduino.svg' },
+export const SKILL_CATEGORIES = [
+  { id: 'all', label: 'Everything' },
+  { id: 'core', label: 'Languages' },
+  { id: 'ai', label: 'AI & ML' },
+  { id: 'llm', label: 'LLMs & agents' },
+  { id: 'data', label: 'Data & stores' },
+  { id: 'web', label: 'Web & APIs' },
+  { id: 'infra', label: 'Cloud & tooling' },
 ];
 
-// Map skills data to their corresponding icons
-const mappedSkills = skillsData.map((skill) => {
-  const iconPath = `../assetes/skill/${skill.icon}`;
-  return {
-    name: skill.name,
-    skillicon: skillIcons[iconPath]?.default || ''
-  };
-});
+const skillsData = [
+  // core
+  { name: 'Python',                  icon: 'python.webp',                   category: 'core' },
+  { name: 'JavaScript',              icon: 'javascript.webp',               category: 'core' },
+  { name: 'Java',                    icon: 'java.webp',                     category: 'core' },
+  { name: 'C++',                     icon: 'cpp.webp',                      category: 'core' },
+  { name: 'C',                       icon: 'c.webp',                        category: 'core' },
+
+  // ai
+  { name: 'Machine Learning',        icon: 'machineLearning.webp',          category: 'ai' },
+  { name: 'Deep Learning',           icon: 'deeplearning.webp',             category: 'ai' },
+  { name: 'Computer Vision',         icon: 'computerVisionn.webp',          category: 'ai' },
+  { name: 'NLP',                     icon: 'nlp-1.webp',                    category: 'ai' },
+  { name: 'TensorFlow',              icon: 'tensorflow.webp',               category: 'ai' },
+  { name: 'PyTorch',                 icon: 'pytorch.webp',                  category: 'ai' },
+  { name: 'Scikit-learn',            icon: 'scikitlearn.webp',              category: 'ai' },
+  { name: 'OpenCV',                  icon: 'opencv-svgrepo-com.webp',       category: 'ai' },
+  { name: 'Image Segmentation',      icon: 'imagesegmentation.webp',        category: 'ai' },
+  { name: 'Object Detection',        icon: 'objectdetection.webp',          category: 'ai' },
+  { name: 'Diffusion Models',        icon: 'diffusionModels.webp',          category: 'ai' },
+  { name: 'Generative AI',           icon: 'genrativeAI.webp',              category: 'ai' },
+
+  // llm
+  { name: 'LangChain',               icon: 'langchain.webp',                category: 'llm' },
+  { name: 'LangGraph',               icon: 'langgraph.webp',                category: 'llm' },
+  { name: 'LlamaIndex',              icon: 'llamaindex.webp',               category: 'llm' },
+  { name: 'CrewAI',                  icon: 'crewai.webp',                   category: 'llm' },
+  { name: 'RAG',                     icon: 'rag.webp',                      category: 'llm' },
+  { name: 'LLMOps',                  icon: 'llmops.webp',                   category: 'llm' },
+  { name: 'Prompt Engineering',      icon: 'promptengineering.webp',        category: 'llm' },
+  { name: 'AI Agents',               icon: 'aiagent.webp',                  category: 'llm' },
+  { name: 'Chatbot Development',     icon: 'chatbot.webp',                  category: 'llm' },
+  { name: 'Hugging Face',            icon: 'hugging-face.webp',             category: 'llm' },
+  { name: 'Ollama',                  icon: 'ollama.webp',                   category: 'llm' },
+
+  // data
+  { name: 'Pandas',                  icon: 'pandas.webp',                   category: 'data' },
+  { name: 'NumPy',                   icon: 'numpy.webp',                    category: 'data' },
+  { name: 'Matplotlib',              icon: 'matplotlib.webp',               category: 'data' },
+  { name: 'Seaborn',                 icon: 'seaborn.webp',                  category: 'data' },
+  { name: 'Kaggle',                  icon: 'kaggle.webp',                   category: 'data' },
+  { name: 'Google Colab',            icon: 'googelcolab.webp',              category: 'data' },
+  { name: 'MongoDB',                 icon: 'mongoDB.webp',                  category: 'data' },
+  { name: 'MySQL',                   icon: 'mysql.webp',                    category: 'data' },
+  { name: 'PostgreSQL',              icon: 'postgresql.webp',               category: 'data' },
+  { name: 'Weaviate',                icon: 'Weaviate.webp',                 category: 'data' },
+  { name: 'Chroma',                  icon: 'chroma.webp',                   category: 'data' },
+  { name: 'Pinecone',                icon: 'Pinecone Database.webp',        category: 'data' },
+
+  // web
+  { name: 'React',                   icon: 'react.webp',                    category: 'web' },
+  { name: 'React Native',            icon: 'react.webp',                    category: 'web' },
+  { name: 'Tailwind',                icon: 'tailwind.webp',                 category: 'web' },
+  { name: 'MaterialUI',              icon: 'materialui.webp',               category: 'web' },
+  { name: 'FastAPI',                 icon: 'fastapi.webp',                  category: 'web' },
+  { name: 'Flask',                   icon: 'flask.webp',                    category: 'web' },
+  { name: 'Postman',                 icon: 'postman.webp',                  category: 'web' },
+
+  // infra
+  { name: 'AWS',                     icon: 'aws.webp',                      category: 'infra' },
+  { name: 'Azure',                   icon: 'azure.webp',                    category: 'infra' },
+  { name: 'Docker',                  icon: 'docker.webp',                   category: 'infra' },
+  { name: 'Kubernetes',              icon: 'kubernetes.webp',               category: 'infra' },
+  { name: 'DevOps',                  icon: 'Devops.webp',                   category: 'infra' },
+  { name: 'CI/CD',                   icon: 'cicdPipeline.webp',             category: 'infra' },
+  { name: 'Git',                     icon: 'git.webp',                      category: 'infra' },
+  { name: 'GitHub',                  icon: 'github.webp',                   category: 'infra' },
+  { name: 'VS Code',                 icon: 'visual-studio-code.webp',       category: 'infra' },
+  { name: 'Firebase',                icon: 'firebase.webp',                 category: 'infra' },
+  { name: 'IoT',                     icon: 'iot.webp',                      category: 'infra' },
+  { name: 'Arduino',                 icon: 'arduino.webp',                  category: 'infra' },
+];
+
+const mappedSkills = skillsData.map((skill) => ({
+  name: skill.name,
+  category: skill.category,
+  skillicon: iconModules[`../assetes/skillicons/${skill.icon}`]?.default || '',
+}));
 
 export default mappedSkills;

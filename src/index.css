@@ -33,6 +33,13 @@
 
   --card-dim-floor: 0.62;
   --nav-scrolled: rgba(255, 255, 255, 0.85);
+
+  --domain-llm: #5B3DF5;
+  --domain-generative: #E07600;
+  --domain-vision: #0891B2;
+  --domain-ml: #DB2777;
+  --domain-engineering: #4D7C0F;
+  --node-idle: #C7C7D2;
 }
 
 /* Dark Theme */
@@ -58,6 +65,13 @@
 
   --card-dim-floor: 0.22;
   --nav-scrolled: rgba(11, 11, 16, 0.82);
+
+  --domain-llm: #7C5CFF;
+  --domain-generative: #FF8904;
+  --domain-vision: #22D3EE;
+  --domain-ml: #F472B6;
+  --domain-engineering: #A3E635;
+  --node-idle: #3A3A4A;
 }
 
 /* Blue Theme */
@@ -83,6 +97,13 @@
 
   --card-dim-floor: 0.62;
   --nav-scrolled: rgba(232, 242, 253, 0.85);
+
+  --domain-llm: #2563EB;
+  --domain-generative: #F59E0B;
+  --domain-vision: #0891B2;
+  --domain-ml: #DB2777;
+  --domain-engineering: #0F766E;
+  --node-idle: #A9C2DE;
 }
 
 /* custom scroll */

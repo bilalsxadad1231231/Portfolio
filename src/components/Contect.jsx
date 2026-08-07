@@ -9,7 +9,7 @@ import Container from './ReusebleComponents/Container';
 const Contect = () => {
   return (
     <div id='contact'>
-        <WaveSection fillcolor="var(--color-bg)" bgColor="bg-border"/>
+        <WaveSection fillcolor="var(--color-bg)" bgColor="bg-void"/>
 
         <Container bgcolor="bg">
 

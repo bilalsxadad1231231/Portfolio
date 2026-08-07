@@ -16,6 +16,14 @@ const read = () => {
       dimFloor: 0.22,
       surface: '#15151D',
       accent: '#FF8904',
+      nodeIdle: '#3A3A4A',
+      domainColors: {
+        llm: '#7C5CFF',
+        generative: '#FF8904',
+        vision: '#22D3EE',
+        ml: '#F472B6',
+        engineering: '#A3E635',
+      },
     };
   }
 
@@ -38,6 +46,14 @@ const read = () => {
     dimFloor: num('--card-dim-floor', 0.22),
     surface: rgb('--surface-rgb', '#15151D'),
     accent: rgb('--accent-rgb', '#FF8904'),
+    nodeIdle: s.getPropertyValue('--node-idle').trim() || '#3A3A4A',
+    domainColors: {
+      llm: s.getPropertyValue('--domain-llm').trim() || '#7C5CFF',
+      generative: s.getPropertyValue('--domain-generative').trim() || '#FF8904',
+      vision: s.getPropertyValue('--domain-vision').trim() || '#22D3EE',
+      ml: s.getPropertyValue('--domain-ml').trim() || '#F472B6',
+      engineering: s.getPropertyValue('--domain-engineering').trim() || '#A3E635',
+    },
   };
 };
 
