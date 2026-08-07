@@ -35,4 +35,12 @@ export default [
       ],
     },
   },
+  {
+    // react-three-fiber renders three.js objects as JSX intrinsics, which the
+    // React plugin has no way to know about.
+    files: ['src/components/three/**/*.jsx'],
+    rules: {
+      'react/no-unknown-property': 'off',
+    },
+  },
 ]

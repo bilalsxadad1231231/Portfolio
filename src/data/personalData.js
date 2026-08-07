@@ -3,7 +3,7 @@ export const personalData = {
     profile: '../assetes/image.jpg',
     designation: "FULL STACK AI DEVELOPER",
     description: "Full-Stack Software Engineer and AI Developer specializing in Generative AI, LLMs, Agentic AI and NLP, with hands-on experience in LangChain, LangGraph, and LLMOps/MLOps for scalable AI deployment. Skilled in Python, FastAPI, SQL (backend) and React, React Native (frontend), with strong expertise in Computer Vision, Diffusion Models, and AI-powered automation. Proficient in CI/CD, Docker, cloud infrastructure (AWS, Azure), and continuously growing through certifications in AWS, Google IT, and Deep Learning.",
-    email: 'bilal.ai.developer@gmail.com',
+    email: 'bilal@nexahome.co',
     phone: '+923119404616',
     address: 'Malakand',
     github: 'https://github.com/bilalsxadad1231231',

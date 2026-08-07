@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 
 import { useTheme } from "../context/Themecontext";
 import { Link } from "react-scroll";
@@ -7,6 +7,15 @@ const Navbar = ({ tabs = ["Home", "About", "Skills", "Projects", "Contact"] }) =
   const { theme, setTheme } = useTheme();
   const [isActiveBtn, setisActiveBtn] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // The bar rides transparent over the hero, then fills in once you leave it.
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Memoize tabs to prevent recreation
   const memoizedTabs = useMemo(() => tabs, [tabs]);
@@ -34,7 +43,11 @@ const Navbar = ({ tabs = ["Home", "About", "Skills", "Projects", "Contact"] }) =
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-[9999] px-4 md:px-48 flex bg-bg bg-opacity-95 backdrop-blur-sm justify-between items-center p-2 text-white shadow-xl border-b border-border/20">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[9999] px-4 md:px-48 flex justify-between items-center p-2 text-diffcolor ${
+          isScrolled ? "nav-scrolled" : ""
+        }`}
+      >
         
         {/* Logo */}
         <div className="text-xl font-bold text-white bg-border p-2 md:p-4 border rounded-b-lg hover:cursor-pointer hover:scale-105 transition-transform">MB</div>
@@ -65,7 +78,7 @@ const Navbar = ({ tabs = ["Home", "About", "Skills", "Projects", "Contact"] }) =
           
           <button
             onClick={toggleMobileMenu}
-            className="p-2 text-white hover:text-border transition-all duration-300 bg-border/20 rounded-lg hover:bg-border/40 hover:scale-110"
+            className="p-2 text-diffcolor hover:text-border transition-all duration-300 bg-border/20 rounded-lg hover:bg-border/40 hover:scale-110"
             aria-label="Toggle mobile menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +109,7 @@ const Navbar = ({ tabs = ["Home", "About", "Skills", "Projects", "Contact"] }) =
           {/* Close button */}
           <button
             onClick={closeMobileMenu}
-            className="absolute top-4 right-4 p-2 text-white hover:text-border transition-all duration-300 bg-border/20 rounded-full hover:bg-border/40 hover:scale-110 z-50"
+            className="absolute top-4 right-4 p-2 text-diffcolor hover:text-border transition-all duration-300 bg-border/20 rounded-full hover:bg-border/40 hover:scale-110 z-50"
             aria-label="Close menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

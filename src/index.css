@@ -2,11 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/*
+ * Two token sets per theme:
+ *  - --color-*      the original palette, still used by About/Skills/Contact
+ *  - --*-rgb        the hero/gallery palette, as space-separated channels so
+ *                   Tailwind opacity modifiers (bg-void/80) keep working
+ * --field-* drive the WebGL point cloud, which has to invert its blending on
+ * light grounds: additive blending is invisible against white.
+ */
+:root,
+[data-theme="light"] {
   --color-bg: #ffffff;
   --color-text: #FF8904;
   --color-border: #FF8904;
   --color-diffcolor: #222222;
+
+  --void-rgb: 255 255 255;
+  --surface-rgb: 244 244 248;
+  --bone-rgb: 20 20 26;
+  --fog-rgb: 90 90 107;
+  --accent-rgb: 255 137 4;
+  --on-accent-rgb: 20 20 26;
+  --glow-rgb: 109 74 255;
+
+  --field-a: #6D4AFF;
+  --field-b: #FF8904;
+  --field-c: #0EA5E9;
+  --field-additive: 0;
+  --field-opacity: 0.5;
+
+  --card-dim-floor: 0.62;
+  --nav-scrolled: rgba(255, 255, 255, 0.85);
 }
 
 /* Dark Theme */
@@ -15,6 +41,23 @@
   --color-text: #FF8904;
   --color-border: #FF8904;
   --color-diffcolor: #ffffff;
+
+  --void-rgb: 11 11 16;
+  --surface-rgb: 21 21 29;
+  --bone-rgb: 242 242 245;
+  --fog-rgb: 154 154 174;
+  --accent-rgb: 255 137 4;
+  --on-accent-rgb: 11 11 16;
+  --glow-rgb: 124 92 255;
+
+  --field-a: #7C5CFF;
+  --field-b: #FF8904;
+  --field-c: #22D3EE;
+  --field-additive: 1;
+  --field-opacity: 1;
+
+  --card-dim-floor: 0.22;
+  --nav-scrolled: rgba(11, 11, 16, 0.82);
 }
 
 /* Blue Theme */
@@ -23,6 +66,23 @@
   --color-text: #1e40af;
   --color-border: #2563eb;
   --color-diffcolor: #222222;
+
+  --void-rgb: 232 242 253;
+  --surface-rgb: 255 255 255;
+  --bone-rgb: 11 31 58;
+  --fog-rgb: 74 97 128;
+  --accent-rgb: 37 99 235;
+  --on-accent-rgb: 255 255 255;
+  --glow-rgb: 245 158 11;
+
+  --field-a: #2563EB;
+  --field-b: #7C3AED;
+  --field-c: #0EA5E9;
+  --field-additive: 0;
+  --field-opacity: 0.45;
+
+  --card-dim-floor: 0.62;
+  --nav-scrolled: rgba(232, 242, 253, 0.85);
 }
 
 /* custom scroll */
@@ -73,11 +133,17 @@ nav {
   align-items: center !important;
   justify-content: space-between !important;
   padding: 0.5rem 1rem !important;
-  background-color: var(--color-bg) !important;
-  background-opacity: 0.95 !important;
-  backdrop-filter: blur(8px) !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-  border-bottom: 1px solid rgba(255, 137, 4, 0.2) !important;
+  /* Transparent over the hero; the scrolled state below fills it in. */
+  background-color: transparent !important;
+  border-bottom: 1px solid transparent !important;
+  transition: background-color 0.35s ease, border-color 0.35s ease,
+    backdrop-filter 0.35s ease !important;
+}
+
+nav.nav-scrolled {
+  background-color: var(--nav-scrolled) !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgb(var(--accent-rgb) / 0.2) !important;
 }
 
 /* Ensure mobile menu button is always visible */
