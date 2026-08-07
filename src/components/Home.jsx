@@ -1,5 +1,5 @@
 import { personalData } from '../data/personalData';
-import profileImage from '../assetes/myProfile.jpg';
+import profileImage from '../assetes/myProfile.png';
 import React, { useCallback } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
