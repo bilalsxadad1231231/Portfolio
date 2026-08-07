@@ -3,7 +3,7 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { useTheme } from "../context/Themecontext";
 import { Link } from "react-scroll";
 
-const Navbar = ({ tabs = ["Home", "About", "Skills", "Projects", "Contact"] }) => {
+const Navbar = ({ tabs = ["Home", "About", "Experience", "Skills", "Projects", "Contact"] }) => {
   const { theme, setTheme } = useTheme();
   const [isActiveBtn, setisActiveBtn] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
