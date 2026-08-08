@@ -12,6 +12,29 @@ import { getProjectImage } from '../data/projectImages';
 
 const ProjectRing = lazy(() => import('./three/ProjectRing'));
 
+/**
+ * Card-shaped stand-in for the moment before the canvas module arrives, so the
+ * gallery has visible structure instead of a blank band.
+ */
+function RingSkeleton() {
+  return (
+    <div className="pointer-events-none flex h-full items-center justify-center gap-4">
+      {[0.4, 0.7, 1, 0.7, 0.4].map((scale, i) => (
+        <div
+          key={i}
+          className="animate-pulse rounded-lg border border-bone/10 bg-bone/[0.06]"
+          style={{
+            width: `${scale * 240}px`,
+            height: `${scale * 150}px`,
+            opacity: 0.25 + scale * 0.5,
+            animationDelay: `${i * 120}ms`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 const supportsWebGL = () => {
   try {
     const canvas = document.createElement('canvas');
@@ -125,15 +148,18 @@ const ProjectsGallery = () => {
           onKeyDown={onKeyDown}
           className="mt-6 h-[42vh] min-h-[300px] w-full cursor-grab touch-pan-y select-none active:cursor-grabbing focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-glow"
         >
-          {inView && (
-            <Suspense fallback={null}>
+          {inView ? (
+            <Suspense fallback={<RingSkeleton />}>
               <ProjectRing
                 key={domain}
                 projects={projects}
                 activeIndex={Math.min(activeIndex, projects.length - 1)}
                 onSelect={setActiveIndex}
+                onContextLost={() => setWebgl(false)}
               />
             </Suspense>
+          ) : (
+            <RingSkeleton />
           )}
         </div>
       ) : (

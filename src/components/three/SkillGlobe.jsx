@@ -1,6 +1,7 @@
-import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useTexture } from '@react-three/drei';
+import useLazyTexture from './useLazyTexture';
+import { dprRange, glOptions, watchContextLoss } from './glDefaults';
 import * as THREE from 'three';
 import skills from '../../data/Skillicon';
 
@@ -27,13 +28,10 @@ const useSpherePoints = (count) =>
 
 function Icon({ skill, position, dimmed, onHover }) {
   const ref = useRef();
-  const texture = useTexture(skill.skillicon);
+  // Non-suspending: this sprite draws a placeholder tile straight away and
+  // takes its icon whenever that one file finishes downloading.
+  const texture = useLazyTexture(skill.skillicon);
   const [hovered, setHovered] = useState(false);
-
-  useMemo(() => {
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = 4;
-  }, [texture]);
 
   useFrame(() => {
     const s = ref.current;
@@ -68,12 +66,26 @@ function Icon({ skill, position, dimmed, onHover }) {
         onHover(null);
       }}
     >
-      <spriteMaterial map={texture} transparent opacity={0.8} toneMapped={false} depthWrite={false} />
+      {/* Keyed on whether the map exists: adding a texture to a live material
+          changes the shader program, and three.js will not recompile it in
+          place, so the sprite would stay a flat placeholder forever. */}
+      <spriteMaterial
+        key={texture ? 'mapped' : 'placeholder'}
+        map={texture || null}
+        color={texture ? '#ffffff' : PLACEHOLDER}
+        transparent
+        opacity={0.8}
+        toneMapped={false}
+        depthWrite={false}
+      />
     </sprite>
   );
 }
 
 const WORLD = new THREE.Vector3();
+
+/** Tile colour shown in an icon's place until its own texture lands. */
+const PLACEHOLDER = '#8894a8';
 
 function Globe({ activeCategory, onHover, reducedMotion }) {
   const groupRef = useRef();
@@ -167,26 +179,25 @@ function Rig() {
   return null;
 }
 
-export default function SkillGlobe({ activeCategory, onHover }) {
+export default function SkillGlobe({ activeCategory, onHover, onContextLost }) {
   const reducedMotion =
     typeof window !== 'undefined' &&
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   return (
     <Canvas
-      dpr={[1, 1.75]}
-      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+      dpr={dprRange()}
+      gl={glOptions()}
       camera={{ position: [0, 0, 11], fov: 45 }}
       onPointerMissed={() => onHover(null)}
+      onCreated={({ gl }) => watchContextLoss(gl, onContextLost)}
     >
       <Rig />
-      <Suspense fallback={null}>
-        <Globe
-          activeCategory={activeCategory}
-          onHover={onHover}
-          reducedMotion={reducedMotion}
-        />
-      </Suspense>
+      <Globe
+        activeCategory={activeCategory}
+        onHover={onHover}
+        reducedMotion={reducedMotion}
+      />
     </Canvas>
   );
 }

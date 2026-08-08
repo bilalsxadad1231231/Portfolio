@@ -1,27 +1,32 @@
 // Single source of truth for project artwork, shared by the 3D gallery and the
 // flat card fallback. Imported eagerly so Vite fingerprints and bundles them.
+//
+// These are WebP rebuilds capped at 1280px, not the originals in ../assetes/project/.
+// The originals ran to 5.00 MB and one was 5246px wide — as a GPU texture that
+// single image cost 60 MB of video memory, which is what made the gallery slow
+// to appear on phones. Same set, 0.80 MB.
 import fallbackImage from '../assetes/image.jpg';
-import aiAssistantImage from '../assetes/project/ai-personnal-assistant.jpeg';
-import smartHomeImage from '../assetes/project/smart-home-llm.jpeg';
-import multiDocImage from '../assetes/project/multidocument-chatbot.jpeg';
-import eyeDiseaseImage from '../assetes/project/eye-disease-detector.jpeg';
-import concreteImage from '../assetes/project/concrete-optimizer.jpeg';
-import spamImage from '../assetes/project/spam-detector.jpeg';
-import recipeImage from '../assetes/project/recipe app.jpeg';
-import transformerImage from '../assetes/project/transformer-scratch-tensorflow.jpeg';
-import doctorImage from '../assetes/project/doctor-appointment-booking.jpeg';
-import cicdImage from '../assetes/project/cicd.png';
-import llamaImage from '../assetes/project/LLaMA-7B.png';
-import diffusionImage from '../assetes/project/diffusion-model-fintune.png';
-import drugDiscoveryImage from '../assetes/project/drug-discovery.jpeg';
-import virtualTryOnImage from '../assetes/project/virtual-try-on.png';
-import researchImage from '../assetes/project/research.jpg';
-import ganImage from '../assetes/project/gan.jpg';
-import objectDetectionImage from '../assetes/project/object-detection.png';
-import ocrImage from '../assetes/project/OCR.jpeg';
-import segmentationImage from '../assetes/project/segmentation.png';
-import objectTrackingImage from '../assetes/project/object-tracking.jpeg';
-import autismImage from '../assetes/project/autism.jpeg';
+import aiAssistantImage from '../assetes/projectweb/ai-personnal-assistant.webp';
+import smartHomeImage from '../assetes/projectweb/smart-home-llm.webp';
+import multiDocImage from '../assetes/projectweb/multidocument-chatbot.webp';
+import eyeDiseaseImage from '../assetes/projectweb/eye-disease-detector.webp';
+import concreteImage from '../assetes/projectweb/concrete-optimizer.webp';
+import spamImage from '../assetes/projectweb/spam-detector.webp';
+import recipeImage from '../assetes/projectweb/recipe-app.webp';
+import transformerImage from '../assetes/projectweb/transformer-scratch-tensorflow.webp';
+import doctorImage from '../assetes/projectweb/doctor-appointment-booking.webp';
+import cicdImage from '../assetes/projectweb/cicd.webp';
+import llamaImage from '../assetes/projectweb/llama-7b.webp';
+import diffusionImage from '../assetes/projectweb/diffusion-model-fintune.webp';
+import drugDiscoveryImage from '../assetes/projectweb/drug-discovery.webp';
+import virtualTryOnImage from '../assetes/projectweb/virtual-try-on.webp';
+import researchImage from '../assetes/projectweb/research.webp';
+import ganImage from '../assetes/projectweb/gan.webp';
+import objectDetectionImage from '../assetes/projectweb/object-detection.webp';
+import ocrImage from '../assetes/projectweb/ocr.webp';
+import segmentationImage from '../assetes/projectweb/segmentation.webp';
+import objectTrackingImage from '../assetes/projectweb/object-tracking.webp';
+import autismImage from '../assetes/projectweb/autism.webp';
 
 export const PROJECT_IMAGES = {
   1: aiAssistantImage,

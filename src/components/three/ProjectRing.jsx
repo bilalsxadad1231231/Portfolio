@@ -1,6 +1,7 @@
-import { Suspense, useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useTexture } from '@react-three/drei';
+import useLazyTexture from './useLazyTexture';
+import { dprRange, glOptions, watchContextLoss } from './glDefaults';
 import * as THREE from 'three';
 import { Field } from './LatentField';
 import { getProjectImage } from '../../data/projectImages';
@@ -21,15 +22,16 @@ function Card({ project, angle, groupRotation, isActive, onSelect, tokens }) {
   const cardRef = useRef();
   const meshRef = useRef();
   const frameRef = useRef();
-  const texture = useTexture(getProjectImage(project.id));
+  // Non-suspending, so a card shows its frame immediately and fills with
+  // artwork when its own image lands rather than waiting for all 21.
+  const texture = useLazyTexture(getProjectImage(project.id));
 
   // Fit the artwork inside the card box at its own aspect ratio. Stretching
   // every screenshot to one shape misrepresents the work.
   const [w, h] = useMemo(() => {
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = 4;
-
-    const image = texture.image;
+    // Before the image lands, hold the card at a sane default shape so the
+    // placeholder occupies the space the artwork will take.
+    const image = texture?.image;
     const aspect = image?.width && image?.height ? image.width / image.height : 16 / 10;
 
     let width = CARD_W;
@@ -105,7 +107,14 @@ function Card({ project, angle, groupRotation, isActive, onSelect, tokens }) {
           onPointerOut={() => (document.body.style.cursor = '')}
         >
           <planeGeometry args={[w, h]} />
-          <meshBasicMaterial map={texture} toneMapped={false} />
+          {/* Keyed for the same reason as the globe sprites: a material that
+              was compiled without a map will not pick one up in place. */}
+          <meshBasicMaterial
+            key={texture ? 'mapped' : 'placeholder'}
+            map={texture || null}
+            color={texture ? '#ffffff' : tokens.surface}
+            toneMapped={false}
+          />
         </mesh>
       </group>
     </group>
@@ -240,7 +249,7 @@ function Ring({ projects, activeIndex, onSelect, reducedMotion, tokens }) {
   );
 }
 
-export default function ProjectRing({ projects, activeIndex, onSelect }) {
+export default function ProjectRing({ projects, activeIndex, onSelect, onContextLost }) {
   const tokens = useThemeTokens();
   const reducedMotion =
     typeof window !== 'undefined' &&
@@ -248,20 +257,19 @@ export default function ProjectRing({ projects, activeIndex, onSelect }) {
 
   return (
     <Canvas
-      dpr={[1, 1.75]}
-      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+      dpr={dprRange()}
+      gl={glOptions()}
       camera={{ position: [0, 0.15, RADIUS + 3.2], fov: 44 }}
+      onCreated={({ gl }) => watchContextLoss(gl, onContextLost)}
     >
       <CameraFit />
-      <Suspense fallback={null}>
-        <Ring
-          projects={projects}
-          activeIndex={activeIndex}
-          onSelect={onSelect}
-          reducedMotion={reducedMotion}
-          tokens={tokens}
-        />
-      </Suspense>
+      <Ring
+        projects={projects}
+        activeIndex={activeIndex}
+        onSelect={onSelect}
+        reducedMotion={reducedMotion}
+        tokens={tokens}
+      />
       {/* The same field as the hero, kept faint so the artwork stays dominant. */}
       <group position={[0, 0, -3]} scale={3.2}>
         <Field
