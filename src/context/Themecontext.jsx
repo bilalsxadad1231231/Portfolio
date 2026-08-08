@@ -5,13 +5,12 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ( {children} ) =>{
 
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "blue");
-
+    // Every load starts on blue. A previously chosen theme is deliberately not
+    // restored — switching applies for the session only.
+    const [theme, setTheme] = useState("blue");
 
     useEffect(() => {
-        // Set the theme on the root HTML element
         document.documentElement.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
       }, [theme]);
 
     return (
