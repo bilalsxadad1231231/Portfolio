@@ -4,7 +4,7 @@
  * D:\Company projects\docs\projects\.
  *
  * Attribution rules from those docs, which must not be mixed:
- *   - AxonBuild employment  -> 10 production systems
+ *   - AxonBuild employment  -> the production systems listed below
  *   - Nexa Home             -> co-founded startup, never an AxonBuild bullet
  *   - JARVIS                -> academic final year project, never AxonBuild
  */
@@ -18,7 +18,7 @@ export const ROLES = [
     start: '2025-08',
     end: null,
     summary:
-      'Shipped ten production AI systems — agentic assistants, RAG platforms, and multi-tenant SaaS — across FastAPI, Node.js, and React.',
+      'Shipped nine production AI systems — agentic assistants, RAG platforms, and multi-tenant SaaS — across FastAPI, Node.js, and React.',
     bullets: [
       'Engineered LLM pipelines with GPT-4o tool calling, streaming responses, and Langfuse tracing for token cost and quality evaluation.',
       'Deployed to AWS Lambda, Azure, DigitalOcean, and Firebase with GitHub Actions CI/CD and per-tenant container isolation.',
@@ -47,7 +47,7 @@ export const ROLES = [
   },
 ];
 
-/** The ten systems shipped under the AxonBuild role. */
+/** The systems shipped under the AxonBuild role. */
 export const PRODUCTION_SYSTEMS = [
   {
     name: 'StepMate',
@@ -129,14 +129,6 @@ export const PRODUCTION_SYSTEMS = [
     stack: ['Python', 'RAG', 'Streamlit'],
     proof: 'Dual UI',
     link: 'https://github.com/AxonBuild/tom-orent-RAG',
-  },
-  {
-    name: 'CLO Generator',
-    domain: 'Education · LLM',
-    blurb: 'Course learning outcome generation for academic programme design.',
-    stack: ['Python', 'LLM'],
-    proof: null,
-    link: null,
   },
 ];
 

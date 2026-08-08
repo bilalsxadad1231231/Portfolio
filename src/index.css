@@ -125,12 +125,10 @@
   box-sizing: border-box;
 }
 
-/* Optimize animations */
-.transform, .transition-transform, .hover\:scale-105, .hover\:scale-110 {
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
+/* NOTE: a rule here previously forced `transform: translateZ(0)` onto
+   .transition-transform and .hover\:scale-*, which outranked Tailwind's own
+   scale utilities and silently disabled every scale animation on the page.
+   Removed. Promote individual elements with will-change where it is needed. */
 
 /* Optimize backdrop blur */
 .backdrop-blur-xl {
@@ -143,47 +141,16 @@ img {
   image-rendering: crisp-edges;
 }
 
-/* Navbar specific styles */
+/* Navbar. Layout lives in the component; only the scrolled surface is here,
+   because it needs the themed --nav-scrolled token. */
 nav {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  z-index: 9999 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 0.5rem 1rem !important;
-  /* Transparent over the hero; the scrolled state below fills it in. */
-  background-color: transparent !important;
-  border-bottom: 1px solid transparent !important;
-  transition: background-color 0.35s ease, border-color 0.35s ease,
-    backdrop-filter 0.35s ease !important;
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
-nav.nav-scrolled {
-  background-color: var(--nav-scrolled) !important;
-  backdrop-filter: blur(10px) !important;
-  border-bottom: 1px solid rgb(var(--accent-rgb) / 0.2) !important;
-}
-
-/* Ensure mobile menu button is always visible */
-@media (max-width: 768px) {
-  nav {
-    padding: 0.5rem 1rem !important;
-  }
-  
-  nav > div:last-child {
-    display: none !important; /* Hide desktop theme selector on mobile */
-  }
-  
-  nav > div:nth-child(2) {
-    display: none !important; /* Hide desktop navigation on mobile */
-  }
-  
-  nav > div:nth-child(3) {
-    display: flex !important; /* Show mobile menu button */
-  }
+header.nav-scrolled {
+  background-color: var(--nav-scrolled);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgb(var(--accent-rgb) / 0.18);
 }
 
 /* Mobile-friendly improvements */
