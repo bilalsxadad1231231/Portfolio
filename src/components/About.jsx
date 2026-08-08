@@ -15,28 +15,38 @@ const About = () => {
           About
         </p>
         <SplitHeading className="mt-4 max-w-3xl text-[clamp(2.25rem,6vw,4rem)]">
-          Two halves of the same job
+          Models are the easy part
         </SplitHeading>
 
         <div className="mt-14 grid grid-cols-1 items-start gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
-          {/* The narrative, split the way the heading claims it is */}
+          {/* The narrative */}
           <div className="flex flex-col gap-10">
-            <HalfPanel index="01" title="Generative & agentic">
-              I build AI systems end to end. Most of my recent work is generative
-              and agentic — retrieval pipelines, agent graphs in{' '}
-              <Term delay={120}>LangChain</Term> and <Term delay={200}>LangGraph</Term>,
-              and fine-tuned language models — wrapped in{' '}
-              <Term delay={280}>FastAPI</Term> services and shipped with{' '}
-              <Term delay={360}>Docker</Term> and CI/CD on <Term delay={440}>AWS</Term>{' '}
-              and <Term delay={520}>Azure</Term>.
+            <HalfPanel index="01" title="Making them behave">
+              Calling a model is a few lines. Making one dependable enough to sit
+              in production is the actual work, and it is most of what I do. Every
+              decision boundary in the systems I build is a typed contract —{' '}
+              <Term delay={120}>Pydantic</Term> schemas, forced tool choice,
+              structured outputs — so the model returns data to validate instead of
+              prose to parse. Around that go retries that escalate, deterministic
+              fallbacks for when a provider is down, and{' '}
+              <Term delay={220}>Langfuse</Term> tracing, so cost and quality are
+              measured rather than assumed.
             </HalfPanel>
 
-            <HalfPanel index="02" title="Vision & interface" delay={140}>
-              The other half is computer vision and diffusion models: detection,
-              segmentation, tracking, OCR, and image generation. I write the
-              frontends too, in <Term delay={160}>React</Term> and{' '}
-              <Term delay={240}>React Native</Term>, which is usually what turns a
-              model into something a person can actually use.
+            <HalfPanel index="02" title="Shipping the rest of it" delay={140}>
+              The model is a small part of the product. The rest is retrieval that
+              finds the right context — hierarchical chunking and hybrid dense +
+              BM25 fusion over <Term delay={160}>Qdrant</Term>,{' '}
+              <Term delay={230}>Pinecone</Term>, and{' '}
+              <Term delay={300}>Meilisearch</Term> — the extraction pipelines that
+              build the corpus in the first place, the{' '}
+              <Term delay={370}>FastAPI</Term> and Node services around it, and the
+              deploy on <Term delay={440}>AWS Lambda</Term>,{' '}
+              <Term delay={500}>Vercel</Term>, Firebase, or DigitalOcean. I write
+              the frontends too — <Term delay={560}>React</Term>,{' '}
+              <Term delay={620}>Next.js</Term>, and{' '}
+              <Term delay={680}>React Native</Term> — which is usually what turns a
+              model into something a person will actually use.
             </HalfPanel>
 
             <div className="border-t border-bone/10 pt-6">

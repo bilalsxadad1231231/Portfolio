@@ -18,10 +18,12 @@ export const ROLES = [
     start: '2025-08',
     end: null,
     summary:
-      'Shipped nine production AI systems — agentic assistants, RAG platforms, and multi-tenant SaaS — across FastAPI, Node.js, and React.',
+      'Shipped nine production AI systems — agentic assistants, RAG platforms, enterprise workflow tools, and multi-tenant SaaS — from mobile apps through to serverless backends.',
     bullets: [
-      'Engineered LLM pipelines with GPT-4o tool calling, streaming responses, and Langfuse tracing for token cost and quality evaluation.',
-      'Deployed to AWS Lambda, Azure, DigitalOcean, and Firebase with GitHub Actions CI/CD and per-tenant container isolation.',
+      'Built agent systems on typed contracts — Pydantic-schema structured outputs, forced tool choice, and deterministic fallbacks — so model decisions arrive as data to validate rather than prose to parse.',
+      'Designed hierarchical retrieval — L0/L1/L2 chunking with dense and BM25 reciprocal rank fusion — across Qdrant, Pinecone, and Meilisearch.',
+      'Ran LLM extraction over real client data: 282 chat exports and 306 meeting transcripts into ~4,800 QA pairs, indexed as 6,500 vectors for roughly $47.',
+      'Deployed to AWS Lambda, Azure, DigitalOcean App Platform, and Firebase with GitHub Actions CI/CD, Alembic migrations, and per-tenant isolation; instrumented with Langfuse, Sentry, and BetterStack.',
     ],
   },
   {
@@ -53,9 +55,9 @@ export const PRODUCTION_SYSTEMS = [
     name: 'StepMate',
     domain: 'Matching · mobile',
     blurb:
-      'AI study-partner matching for USMLE students. Conversational GPT-4o onboarding into a structured persona, then two-stage matching: Pinecone vector retrieval with metadata filters, followed by batched LLM evaluation.',
-    stack: ['GPT-4o', 'Pinecone', 'Firebase Functions', 'Ionic React'],
-    proof: 'Shipped to Google Play',
+      'AI study-partner matching for medical exam students. Conversational GPT-4o onboarding fills a structured persona through tool calls instead of a form, then matching runs in two stages — Pinecone retrieval with hard filters, then batched LLM compatibility evaluation streamed back as cards. Missions and facets are config-driven, so a new exam type is a JSON file.',
+    stack: ['GPT-4o', 'Pinecone', 'Firebase Functions', 'Ionic React', 'Pusher'],
+    proof: 'Live on web and Google Play',
     link: 'https://www.mystepmate.com',
   },
   {
@@ -80,27 +82,27 @@ export const PRODUCTION_SYSTEMS = [
     name: 'Komet',
     domain: 'Platform · multi-tenant',
     blurb:
-      'Multi-tenant WhatsApp AI agent platform — deploy isolated agents backed by either GPT or n8n workflows, with per-tenant container isolation.',
-    stack: ['FastAPI', 'OpenAI', 'n8n', 'Docker'],
-    proof: 'Powers Halo in production',
+      'Multi-tenant platform for deploying WhatsApp AI agents. Each tenant gets an isolated Go agent provisioned on DigitalOcean App Platform, backed by either GPT or an n8n workflow, with vision, Whisper transcription, TTS voice notes, and per-message token cost tracking.',
+    stack: ['Express', 'Prisma', 'PostgreSQL', 'OpenAI', 'Go / whatsmeow', 'n8n'],
+    proof: 'One isolated agent per tenant; powers Halo',
     link: null,
   },
   {
     name: 'HonyakuOS',
     domain: 'Translation · enterprise',
     blurb:
-      'Enterprise Japanese–English translation management platform with an AI-assisted Shunyaku Lite pipeline.',
-    stack: ['AWS Lambda', 'OpenAI', 'React'],
-    proof: 'Serverless on AWS',
+      'Enterprise Japanese–English translation platform. A Next.js portal serves requesters, admins, and linguists over a Xano data hub, alongside the Shunyaku Lite pipeline: parse and chunk the document, match translation memory and termbase, translate multi-pass with an auditor review, then rebuild the original file from metadata — all one FastAPI container on AWS Lambda.',
+    stack: ['Next.js', 'FastAPI', 'AWS Lambda', 'OpenRouter', 'DeepL', 'Meilisearch'],
+    proof: 'Four translation modes, human-in-the-loop review',
     link: null,
   },
   {
     name: 'EkoMind',
     domain: 'Health · bilingual RAG',
     blurb:
-      'Bilingual EN/FR mental-health application combining clinical RAG with generated therapeutic audio scripts.',
-    stack: ['FastAPI', 'RAG', 'TTS'],
-    proof: 'EN/FR clinical corpus',
+      'Bilingual EN/FR mental-health app. The therapeutic pipeline extracts symptoms, retrieves matching clinical cases from Qdrant, detects limiting beliefs, and streams progressive solutions over SSE — offering generated audio scripts only once an LLM reranker clears a quality gate. Wearable biometrics feed the prompt as context.',
+    stack: ['FastAPI', 'React Native', 'Qdrant', 'MongoDB', 'ElevenLabs'],
+    proof: '174 clinical cases across two languages',
     link: null,
   },
   {
@@ -116,8 +118,8 @@ export const PRODUCTION_SYSTEMS = [
     name: 'Shopdog RAG Agent',
     domain: 'OCR · extraction',
     blurb:
-      'Extraction pipeline for technical PDF service manuals: pulls embedded images, runs dual OCR (vision model plus classic), then an LLM judge and vision correction pass for tables and diagrams.',
-    stack: ['VLM', 'OCR', 'Python', 'RAG'],
+      'Extraction pipeline for technical PDF service manuals. It pulls embedded images, runs two OCR passes — a vision-language model and classic PaddleOCR — then has an LLM judge the disagreements and a vision pass adjudicate them against the image, so tables and diagrams survive into the RAG corpus.',
+    stack: ['PaddleOCR-VL', 'PyMuPDF', 'FastAPI', 'OpenRouter'],
     proof: 'Dual-OCR with LLM judge',
     link: null,
   },
@@ -125,9 +127,9 @@ export const PRODUCTION_SYSTEMS = [
     name: 'Tom Orent RAG',
     domain: 'RAG · knowledge base',
     blurb:
-      'Hierarchical RAG over PDF knowledge bases, with both a custom web chat UI and a Streamlit interface.',
-    stack: ['Python', 'RAG', 'Streamlit'],
-    proof: 'Dual UI',
+      'Hierarchical RAG over PDF knowledge bases. Documents chunk three levels deep — page, paragraph, content — and retrieval drills down through them fusing dense and BM25 results, with whole-document modes for material that should not be split.',
+    stack: ['FastAPI', 'Qdrant', 'OpenAI', 'Streamlit'],
+    proof: 'Three-level retrieval drill-down',
     link: 'https://github.com/AxonBuild/tom-orent-RAG',
   },
 ];
@@ -182,10 +184,19 @@ export const EDUCATION = {
     name: 'JARVIS Voice Assistant',
     team: 'Solo — design, architecture, and implementation',
     blurb:
-      'An offline voice assistant that operates the computer autonomously: wake word, Whisper speech-to-text, and a LangGraph orchestrator routing to screen, browser, and system subgraphs.',
+      'An offline voice assistant that operates a Windows machine autonomously. Wake word and Faster-Whisper transcription feed an LLM router, which either answers or delegates to a LangGraph agent graph — it plans the task, routes each step to a screen, browser, or system agent, and replans when a step fails. Everything runs locally; no audio leaves the machine.',
     detail:
-      'Made a local 9B model reliable for agentic routing using forced tool choice, Pydantic-validated decisions, retry escalation, and heuristic fallbacks.',
-    stack: ['LangGraph', 'LangChain', 'Qwen 3.5 9B', 'Faster-Whisper', 'YOLO', 'EasyOCR'],
+      'The real problem was making a local 9B model reliable enough to route on. Every decision boundary is a Pydantic schema with forced tool choice, escalating retries, and heuristic recovery, and UI grounding is layered — accessibility tree, then DOM, then vision, then YOLO and EasyOCR detection — so the cheapest exact method wins and vision is the last resort. I logged 122 comparative agent runs across grounding strategies, capturing per-step prompts, screenshots, and token cost.',
+    stack: [
+      'LangGraph',
+      'LangChain',
+      'Qwen 3.5 9B',
+      'Faster-Whisper',
+      'Porcupine',
+      'YOLO',
+      'EasyOCR',
+      'PyQt',
+    ],
   },
 };
 
