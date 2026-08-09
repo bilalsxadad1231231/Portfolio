@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="mbTitle">
+  <title id="mbTitle">MB monogram</title>
+  <defs>
+    <clipPath id="mbTile">
+      <rect x="2" y="2" width="60" height="60" rx="13"/>
+    </clipPath>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="13" fill="#FFFFFF"/>
+  <path clip-path="url(#mbTile)" fill="#2563EB" fill-rule="evenodd" d="M2 2H62L2 62Z M8 31V12H11.8L17.5 20L23.2 12H27V31H23.2V19L17.5 26.5L11.8 19V31Z"/>
+  <path fill="none" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" d="M37 33V52M37 33H46A4.75 4.75 0 0 1 46 42.5H37M37 42.5H48A4.75 4.75 0 0 1 48 52H37"/>
+  <rect x="2" y="2" width="60" height="60" rx="13" fill="none" stroke="#2563EB" stroke-width="4"/>
+</svg>

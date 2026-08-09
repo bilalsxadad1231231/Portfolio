@@ -4,7 +4,10 @@
 <html lang="en" data-theme="blue">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/webicon.jpg" />
+    <!-- SVG first: it carries its own dark-mode rule, so the monogram inverts
+         with the browser theme. The jpeg stays as the fallback for Safari. -->
+    <link rel="icon" type="image/svg+xml" href="/Portfolio/favicon.svg" />
+    <link rel="alternate icon" type="image/jpeg" href="/Portfolio/webicon.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bilal's Portfolio</title>
     <meta name="description" content="Muhammad Bilal — full stack AI developer building retrieval pipelines, agent graphs, and fine-tuned models." />
