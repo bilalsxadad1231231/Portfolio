@@ -25,7 +25,8 @@ const prefersReduced = () =>
  */
 export default function SystemsDeck() {
   const trackRef = useRef(null);
-  const [progress, setProgress] = useState(0);
+  const cardRefs = useRef([]);
+  const [index, setIndex] = useState(0);
   const [reduced, setReduced] = useState(prefersReduced);
   const total = PRODUCTION_SYSTEMS.length;
   const lastIndex = total - 1;
@@ -40,6 +41,56 @@ export default function SystemsDeck() {
   useEffect(() => {
     if (reduced) return;
     let frame = 0;
+    let nearest = -1;
+
+    // Positions are written straight to the DOM rather than through state: at
+    // 120Hz a re-render of ten cards per frame is what made the deck stutter.
+    const paint = (progress) => {
+      const front = Math.min(Math.round(progress), lastIndex);
+      for (let i = 0; i < total; i += 1) {
+        const el = cardRefs.current[i];
+        if (!el) continue;
+        const t = i - progress;
+
+        if (t > VISIBLE || t < -1) {
+          el.style.visibility = 'hidden';
+          continue;
+        }
+        el.style.visibility = '';
+
+        let transform;
+        let opacity;
+        let scrim;
+        if (t < 0) {
+          // Leaving: lifted clear of the deck before it fades, so the outgoing
+          // card never sits translucent over the incoming one.
+          const u = -t;
+          transform = `translate3d(0,${-300 * u}px,${200 * u}px) rotateX(${
+            18 * u
+          }deg) scale(${1 + 0.04 * u})`;
+          opacity = u < 0.5 ? 1 : 1 - Math.pow((u - 0.5) / 0.5, 1.5);
+          scrim = 0;
+        } else {
+          // Waiting: lower and further back, so each card behind shows a clean
+          // edge below the one in front of it.
+          transform = `translate3d(0,${t * 30}px,${-t * 70}px) scale(${1 - t * 0.035})`;
+          opacity = t > VISIBLE - 1 ? clamp(VISIBLE - t, 0, 1) : 1;
+          scrim = clamp(t * 0.26, 0, 0.7);
+        }
+
+        el.style.transform = transform;
+        el.style.opacity = opacity;
+        el.style.zIndex = total - Math.max(0, Math.round(t));
+        el.style.pointerEvents = i === front ? 'auto' : 'none';
+        const scrimEl = el.firstElementChild?.lastElementChild;
+        if (scrimEl) scrimEl.style.opacity = scrim;
+      }
+
+      if (front !== nearest) {
+        nearest = front;
+        setIndex(front);
+      }
+    };
 
     const measure = () => {
       frame = 0;
@@ -49,7 +100,7 @@ export default function SystemsDeck() {
       const travel = rect.height - window.innerHeight;
       if (travel <= 0) return;
       const scrolled = clamp(-rect.top, 0, travel);
-      setProgress((scrolled / travel) * lastIndex);
+      paint((scrolled / travel) * lastIndex);
     };
 
     const onScroll = () => {
@@ -65,7 +116,7 @@ export default function SystemsDeck() {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [reduced, lastIndex]);
+  }, [reduced, lastIndex, total]);
 
   /** Scroll the page so the deck lands on `target`. */
   const goTo = (target) => {
@@ -80,8 +131,6 @@ export default function SystemsDeck() {
     const top = trackTop + (clamped / lastIndex) * travel;
     window.scrollTo({ top, behavior: 'smooth' });
   };
-
-  const index = Math.min(Math.round(progress), lastIndex);
 
   // Without motion the deck is simply a list — no pinning, no transforms.
   if (reduced) {
@@ -137,59 +186,27 @@ export default function SystemsDeck() {
               className="relative h-[420px] flex-1"
               style={{ perspective: '1400px', perspectiveOrigin: '50% 30%' }}
             >
-              {PRODUCTION_SYSTEMS.map((system, i) => {
-                // Distance from the front of the deck, as a continuous value.
-                const t = i - progress;
-                if (t > VISIBLE || t < -1) return null;
-
-                let style;
-                if (t < 0) {
-                  // Leaving: lifted clear of the deck before it fades, so the
-                  // outgoing card never sits translucent over the incoming one.
-                  const u = -t;
-                  style = {
-                    transform: `translateY(${-300 * u}px) translateZ(${200 * u}px) rotateX(${
-                      18 * u
-                    }deg) scale(${1 + 0.04 * u})`,
-                    // Fully opaque for the first half of its exit, so it never
-                    // overlaps the next card while see-through.
-                    opacity: u < 0.5 ? 1 : 1 - Math.pow((u - 0.5) / 0.5, 1.5),
-                    filter: `blur(${(3 * u * u).toFixed(2)}px)`,
-                  };
-                } else {
-                  // Waiting: sits lower and further back, so each card behind
-                  // shows a clean edge below the one in front of it.
-                  style = {
-                    transform: `translateY(${t * 30}px) translateZ(${-t * 70}px) scale(${
-                      1 - t * 0.035
-                    })`,
-                    opacity: t > VISIBLE - 1 ? clamp(VISIBLE - t, 0, 1) : 1,
-                    filter: `blur(${Math.min(t * 0.9, 2.5).toFixed(2)}px)`,
-                  };
-                }
-
-                return (
-                  <div
-                    key={system.name}
-                    aria-hidden={i !== index}
-                    className="absolute inset-0"
-                    style={{
-                      ...style,
-                      zIndex: total - Math.max(0, Math.round(t)),
-                      transformStyle: 'preserve-3d',
-                      willChange: 'transform, opacity, filter',
-                      pointerEvents: i === index ? 'auto' : 'none',
-                    }}
-                  >
-                    <Card
-                      system={system}
-                      position={i}
-                      total={total}
-                      scrim={t > 0 ? clamp(t * 0.26, 0, 0.7) : 0}
-                    />
-                  </div>
-                );
-              })}
+              {PRODUCTION_SYSTEMS.map((system, i) => (
+                <div
+                  key={system.name}
+                  ref={(el) => {
+                    cardRefs.current[i] = el;
+                  }}
+                  aria-hidden={i !== index}
+                  className="absolute inset-0"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    // Promoted once, up front. Toggling will-change per frame
+                    // costs more than the layer it asks for.
+                    willChange: 'transform, opacity',
+                    backfaceVisibility: 'hidden',
+                    visibility: i > VISIBLE ? 'hidden' : undefined,
+                    zIndex: total - i,
+                  }}
+                >
+                  <Card system={system} position={i} total={total} />
+                </div>
+              ))}
             </div>
           </div>
 
